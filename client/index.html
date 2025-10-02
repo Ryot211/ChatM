@@ -3,9 +3,47 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="/static/style.css">
     <title>Ryot Chat</title>
+    <script  type="module">
+        import { io } from 'https://cdn.socket.io/4.3.2/socket.io.esm.min.js'
+
+        const socket = io()
+
+    </script>
+<style>
+    *,
+*::before,
+*::after {
+    box-sizing: border-box;
+    background-color: #ccc;
+    }
+:root{
+    color-scheme: light dark;
+    }    
+body{
+    margin: 0;
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    display: grid;
+    place-content: center;
+    height: 100vh;
+    padding:36px;
+    grid-template-rows: 1fr;
+}
+
+
+#chat {
+    border: 2px solid #cacaca;
+    border-radius: 4px;
+    padding: auto;
+    overflow-y: auto;
+    width: 350px;
+    height: 100vh;
+    position: relative;
+}
+
+</style>
 </head>
+
 <body>
     <h1>Hola</h1>
     <section id="chat" >
