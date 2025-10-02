@@ -1,6 +1,6 @@
 import express from 'express'
 import logger from 'morgan'
-import {server} from 'socket.io'
+import {Server} from 'socket.io'
 import {createServer} from 'node:http'
 
 const port = process.env.PORT ?? 3000;
@@ -10,8 +10,16 @@ const app = express()
 const server = createServer(app)
 const io= new Server(server)
 
-io.on('connection',() =>{
+io.on('connection',(socket) =>{
     console.log('a user haz connected!')
+    socket.on('disconnect',()=>{
+        console.log('an user has disconnected')
+    })
+
+    socket.on('chat message',(msg)=>{
+        console.log('message: '+msg)
+    })
+
 })
 
 
