@@ -14,9 +14,13 @@
         return username
       }
 
-      const res = await fetch('https://randomuser.me/api/')
-      const { username: randomUsername } = await res.json()
+      const res = await fetch(`https://randomuser.me/api/?seed=${Date.now()}`)
+      const data = await res.json()
 
+      // 3. Extrae el username del primer resultado
+      const randomUsername = data.results[0].login.username
+      console.log(`esto es: ${randomUsername}`)
+      // 4. Guarda ese username en localStorage
       localStorage.setItem('username', randomUsername)
       return randomUsername
     }

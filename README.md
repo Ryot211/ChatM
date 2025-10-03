@@ -14,7 +14,6 @@ Este proyecto es un **chat en tiempo real** desarrollado con **Node.js**.
 - **SQL** – Base de datos para almacenar mensajes.
 
 ---
-
 ## Nota
 
 Este README es solo informativo para mostrar las tecnologías usadas en el proyecto.

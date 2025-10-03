@@ -40,6 +40,7 @@ io.on('connection', async (socket) => {
     const username = socket.handshake.auth.username ?? 'anonymous'
     console.log({ username })
     try {
+      console.log(username)
       result = await db.execute({
         sql: 'INSERT INTO messages (content, user) VALUES (:msg, :username)',
         args: { msg, username }
