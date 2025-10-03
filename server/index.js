@@ -5,6 +5,7 @@ import {createClient} from '@libsql/client'
 import {Server} from 'socket.io'
 import {createServer} from 'node:http'
 
+dotenv.config()
 const port = process.env.PORT ?? 3000;
 
 
@@ -18,7 +19,7 @@ const io= new Server(server, {
 })
 
 const db = createClient({
-    url:"//hip-radioactive-man-ryot211.aws-us-east-1.turso.io",
+    url:"libsql://hip-radioactive-man-ryot211.aws-us-east-1.turso.io",
     authToken:process.env.DB_TOKEN
 })
 
@@ -34,8 +35,19 @@ io.on('connection',(socket) =>{
         console.log('an user has disconnected')
     })
 
-    socket.on('chat message',(msg)=>{
-       io.emit('chat message',msg)
+    socket.on('chat message', async (msg)=>{
+        let result 
+        try{
+            result = await db.execute({
+                sql:`INSERT INTO messages (content) VALUES(:msg)`,
+                args:{msg}
+            })
+        }catch(e){
+            console.error(e)
+            return
+
+        }
+       io.emit('chat message',msg, result.lastInsertRowid.toString())
     })
 
 })
